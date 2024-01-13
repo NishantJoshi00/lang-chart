@@ -69,6 +69,7 @@ async function processedData(env) {
     const title = (_a = queryParams.get("title")) !== null && _a !== void 0 ? _a : "Languages";
     const repo = queryParams.get("repo");
     const owner = queryParams.get("owner");
+    const color = queryParams.get("color");
     console.log([repo, owner]);
     const lang_url = uNull2(LANG_API[env])(owner, repo);
     if (lang_url == null) {
@@ -80,7 +81,7 @@ async function processedData(env) {
                 return null;
             }
             else {
-                return [title, result];
+                return [title, result, color];
             }
         });
     }

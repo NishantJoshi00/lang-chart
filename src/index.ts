@@ -101,12 +101,13 @@ function composeApi(langs: LangApi, colors: LangColorApi): ComposedLang {
 
 async function processedData(
   env: "production" | "dev",
-): Promise<[string, ComposedLang] | null> {
+): Promise<[string, ComposedLang, string | null] | null> {
   const queryParams = new URLSearchParams(window.location.search);
 
   const title = queryParams.get("title") ?? "Languages";
   const repo = queryParams.get("repo");
   const owner = queryParams.get("owner");
+  const color = queryParams.get("color");
 
   console.log([repo, owner]);
 
@@ -122,7 +123,7 @@ async function processedData(
       if (result == null) {
         return null;
       } else {
-        return [title, result];
+        return [title, result, color];
       }
     });
   }

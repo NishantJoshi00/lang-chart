@@ -1,11 +1,14 @@
 let mouseInteraction = false;
 
 processedData("production").then((result) => {
+  const bgColor = result[2] == null ? "#ffffff" : "#" + result[2];
   console.log(result);
+  console.log(bgColor);
   const title = result[0];
   Highcharts.chart("pieChartContainer", {
     chart: {
       type: "pie",
+      backgroundColor: bgColor,
       events: {
         load: () => {
           mouseInteraction = true;
@@ -15,6 +18,9 @@ processedData("production").then((result) => {
     title: {
       text: title,
     },
+    credits: {
+      enabled: false,
+    },
     plotOptions: {
       pie: {
         allowPointSelect: true,
@@ -23,6 +29,7 @@ processedData("production").then((result) => {
           enabled: true,
           format: "<b>{point.name}</b>: {point.percentage:.1f} %",
         },
+        borderColor: bgColor,
 
         point: {
           events: {
@@ -83,7 +90,7 @@ processedData("production").then((result) => {
     series: [
       {
         name: "Language",
-        data: result[1], // Assuming you have your data here
+        data: result[1],
       },
     ],
   });
